@@ -4,7 +4,7 @@ pipeline{
     stages{
         stage('Building Image and dockerzing it'){
             agent {
-                label 'docker-ubuntu'
+                label 'montuUbuntu'
             }
             steps {
                 sh 'mvn package'
@@ -21,7 +21,7 @@ pipeline{
 
         stage('docker push'){
             agent {
-                label 'docker-ubuntu'
+                label 'montuUbuntu'
             }
             steps {
                 sh 'docker push montud/demo:latest'
@@ -31,7 +31,7 @@ pipeline{
 
         stage('Kubernates deploy'){
             steps {
-                bat 'C:\\Users\\coolm\\kubectl.exe apply -f deploy.ydml'
+                bat 'C:\\Users\\coolm\\kubectl.exe apply -f deploy.yml'
             }
         }
     }
