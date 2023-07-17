@@ -7,7 +7,7 @@ pipeline{
                 label 'montuUbuntu'
             }
             steps {
-                sh 'mvn package'
+                sh 'mvn package -DskipTests'
                 sh 'docker build -t montud/demo:latest .'
             }
 
@@ -30,8 +30,11 @@ pipeline{
 
 
         stage('Kubernates deploy'){
+             agent{
+                label 'microkube'
+            }
             steps {
-                bat 'C:\\Users\\coolm\\kubectl.exe apply -f deploy.yml'
+                sh 'microk8s kubectl apply -f deploy.yml'
             }
         }
     }
