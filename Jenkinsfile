@@ -8,14 +8,7 @@ pipeline{
             }
             steps {
                 sh 'mvn package -DskipTests'
-                sh 'docker build -t montud/demo:latest .'
-            }
-
-            post{
-                success{
-                    archiveArtifacts artifacts: 'target/*.jar'
-                    
-                }        
+                sh 'docker build -t montud/user-service:latest .'
             }
         } 
 
@@ -24,7 +17,7 @@ pipeline{
                 label 'montuUbuntu'
             }
             steps {
-                sh 'docker push montud/demo:latest'
+                sh 'docker push montud/user-service:latest'
             }
         }
 
